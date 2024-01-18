@@ -22,6 +22,15 @@ model Post {
     @@index([name])
 }
 
+model Entry {
+    id          String   @id @default(cuid())
+    content     String
+    userId      String
+    user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    dateCreated DateTime @default(now())
+    moodRating  Int?
+}
+
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -58,6 +67,7 @@ model User {
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
+    Entry         Entry[]
 }
 
 model VerificationToken {
