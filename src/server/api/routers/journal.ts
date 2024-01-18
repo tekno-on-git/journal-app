@@ -34,4 +34,17 @@ export const journalRouter = createTRPCRouter({
       });
       return entry;
     }),
+
+  deleteEntry: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { id } = input;
+      const { db, session } = ctx;
+      await db.entry.delete({
+        where: {
+          userId: session.user.id,
+          id,
+        },
+      });
+    }),
 });

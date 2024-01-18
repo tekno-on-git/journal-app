@@ -1,4 +1,5 @@
 import { api } from "@/utils/api";
+import { TrashIcon } from "@heroicons/react/16/solid";
 import moment from "moment";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
@@ -17,7 +18,11 @@ const Entry = () => {
       enabled: entryId !== undefined,
     },
   );
-
+  const { mutate: deleteEntry } = api.journal.deleteEntry.useMutation({
+    onSuccess() {
+      void replace("/entries");
+    },
+  });
   useEffect(() => {
     if (sessionStatus === "unauthenticated") void replace("/");
   }, [sessionStatus, replace]);
@@ -34,6 +39,12 @@ const Entry = () => {
               <h1 className="font-poppins text-3xl text-gray-50">
                 {moment(entryData?.dateCreated).format("MMM D, YYYY")}
               </h1>
+              <button
+                className="rounded-sm bg-gradient-to-br from-gray-700 to-gray-800 p-2"
+                onClick={() => deleteEntry({ id: entryId! })}
+              >
+                <TrashIcon width={25} className="text-gray-50" />
+              </button>
             </div>
             <p className="whitespace-pre-line bg-gray-900 p-5 font-montserrat text-lg text-gray-50 ">
               {entryData?.content}
