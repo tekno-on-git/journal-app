@@ -20,4 +20,18 @@ export const journalRouter = createTRPCRouter({
 
       return newEntry;
     }),
+  getEntryById: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { id } = input;
+      const { db, session } = ctx;
+
+      const entry = await db.entry.findFirst({
+        where: {
+          userId: session.user.id,
+          id,
+        },
+      });
+      return entry;
+    }),
 });
