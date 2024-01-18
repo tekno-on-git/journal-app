@@ -47,4 +47,17 @@ export const journalRouter = createTRPCRouter({
         },
       });
     }),
+
+  getAllEntries: protectedProcedure.query(async ({ ctx }) => {
+    const { db, session } = ctx;
+    const data = await db.entry.findMany({
+      where: {
+        userId: session.user.id,
+      },
+      orderBy: {
+        dateCreated: "desc",
+      },
+    });
+    return data;
+  }),
 });
