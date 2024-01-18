@@ -1,3 +1,4 @@
+import Loading from "@/components/Loading";
 import { api } from "@/utils/api";
 import { TrashIcon } from "@heroicons/react/16/solid";
 import moment from "moment";
@@ -8,7 +9,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 const Entry = () => {
-  const { status: sessionStatus, data: sessionData } = useSession();
+  const { status: sessionStatus } = useSession();
   const { replace, query } = useRouter();
   const entryId = Array.isArray(query.pid) ? query.pid[0] : query.pid;
 
@@ -26,6 +27,8 @@ const Entry = () => {
   useEffect(() => {
     if (sessionStatus === "unauthenticated") void replace("/");
   }, [sessionStatus, replace]);
+  if (sessionStatus === "loading") return <Loading />;
+  if (sessionStatus === "unauthenticated") return;
 
   return (
     <>
