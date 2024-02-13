@@ -13,7 +13,7 @@ _not working due to low limits for free openai api usage_
 - [trpc](https://github.com/trpc/trpc)
 - [zod](https://github.com/colinhacks/zod)
 - [NextAuth](https://github.com/nextauthjs/next-auth)
-- [@t3-oss/env-nextjs]("https://env.t3.gg/docs/nextjs")
+- [@t3-oss/env-nextjs](https://env.t3.gg/docs/nextjs)
 - [moment](https://github.com/moment/moment)
 
 Deployed on: ![vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
