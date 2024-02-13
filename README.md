@@ -2,7 +2,7 @@
 
 Make notes and analyze mood using ChatGPT!
 
-_not working due to low limits for free openai api usage_
+_"Analyze Mood" is not working due to low limits for free openai api usage_
 
 
 https://github.com/codeph-0bia/journal-app/assets/63444697/2a29b862-65e7-4fde-a4cf-e1f57c985f76
